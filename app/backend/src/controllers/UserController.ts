@@ -4,8 +4,11 @@ import UserService from '../services/UserService';
 // import { verifyJWT } from '../utils/JWT';
 
 class UserController {
-  constructor(private userService = new UserService()) {
-    this.login = this.login.bind(this);
+  private userService: UserService;
+
+  constructor() {
+    this.userService = new UserService();
+    // this.login = this.login.bind(this);
     // this.getRole = this.getRole.bind(this);
   }
 
@@ -22,4 +25,4 @@ class UserController {
   };
 }
 
-export default new UserController();
+export default UserController;
