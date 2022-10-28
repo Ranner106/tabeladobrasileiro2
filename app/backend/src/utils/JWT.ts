@@ -1,7 +1,6 @@
 import { sign, verify } from 'jsonwebtoken';
-import * as dotenv from 'dotenv';
 
-dotenv.config();
+import 'dotenv/config';
 
 interface IPayload {
   email: string;
@@ -9,7 +8,7 @@ interface IPayload {
   role?: string;
 }
 
-const secret = process.env.JWT_SECRET;
+const secret = process.env.JWT_SECRET || 'jwt_secret';
 
 export const generateJWT = (payload: IPayload) => {
   const token = sign(payload, secret as string, {

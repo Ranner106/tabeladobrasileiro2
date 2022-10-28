@@ -63,22 +63,22 @@ describe('POST /login', () => {
         })
       });
     
-      // describe('GET /login/validate', () => {
-      //   beforeEach(sinon.restore);
+      describe('GET /login/validate', () => {
+        beforeEach(sinon.restore);
 
-      //   describe('quando é acessada com um token válido', () => {
-      //     it('deve retornar um status 200 e a role do usuário logado', async () => {
-      //       sinon.stub(UserService, "getRole").resolves('admin');
+        describe('quando é acessada com um token válido', () => {
+          it('deve retornar um status 200 e a role do usuário logado', async () => {
+            sinon.stub(UserService, "getRole").resolves('admin');
             
-      //       const httpResponse = await chai
-      //         .request(app)
-      //         .get('/login/validate')
-      //         .set('Authorization', validLoginResponse.token)
+            const httpResponse = await chai
+              .request(app)
+              .get('/login/validate')
+              .set('Authorization', validLoginResponse.token)
       
-      //       expect(httpResponse.status).to.equal(httpStatus.ok)
-      //       expect(httpResponse.body).to.deep.equal({ role: 'admin' })
-      //     })
-      //   });
+            expect(httpResponse.status).to.equal(httpStatus.ok)
+            expect(httpResponse.body).to.deep.equal({ role: 'admin' })
+          })
+        });
 
-      // });
+      });
 });
