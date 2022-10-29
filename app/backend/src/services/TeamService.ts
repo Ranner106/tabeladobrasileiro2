@@ -6,10 +6,16 @@ export default class TeamService {
 
   constructor() {
     this.getTeams = this.getTeams.bind(this);
+    this.getTeamById = this.getTeamById.bind(this);
   }
 
   public async getTeams(): Promise<Iteam[]> {
     const teams = await this.model.findAll();
     return teams;
+  }
+
+  public async getTeamById(id: number): Promise<Iteam | null> {
+    const team = await this.model.findOne({ where: { id } });
+    return team;
   }
 }
