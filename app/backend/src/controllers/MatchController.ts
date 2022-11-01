@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import httpStatus from '../utils/httpStatus';
 import MatchService from '../services/MatchService';
 
 export default class MatchController {
@@ -26,5 +27,22 @@ export default class MatchController {
     }
     const matche = await this.service.getMatches();
     return res.status(200).json(matche);
+  };
+
+  public createMatch = async (req: Request, res: Response) => {
+    try {
+      const newMatchData = req.body;
+      const { homeTeam, awayTeam } = newMatchData;
+      if (homeTeam === awayTeam) {
+        return res.status(httpStatus.unproccessableEntity).json({
+          message: 'It is not possible to create a match with two equal teams',
+        });
+      }
+
+      const newMatch = await this.service.createMatch(newMatchData);
+      return res.status(httpStatus.created).json(newMatch);
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

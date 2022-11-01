@@ -1,5 +1,6 @@
 import Match from '../database/models/Match';
 import Team from '../database/models/Team';
+import { ICreateMatch } from '../interfaces/matchInterfaces';
 
 export default class MatchService {
   public getMatches = async () => {
@@ -21,5 +22,13 @@ export default class MatchService {
       ],
     });
     return matches;
+  };
+
+  public createMatch = async (newMatchData: ICreateMatch) => {
+    const newMatch = await Match.create({
+      ...newMatchData,
+      inProgress: true,
+    });
+    return newMatch;
   };
 }
