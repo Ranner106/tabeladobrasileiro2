@@ -2,6 +2,11 @@ import Match from '../database/models/Match';
 import Team from '../database/models/Team';
 import { ICreateMatch } from '../interfaces/matchInterfaces';
 
+type MatchUpdate = {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+};
+
 export default class MatchService {
   public getMatches = async () => {
     const macthes = await Match.findAll({
@@ -35,5 +40,11 @@ export default class MatchService {
   public finishMatch = async (id: number) => {
     await Match.update({ inProgress: false }, { where: { id } });
     return 'Finished';
+  };
+
+  public updateMatch = async (id: number, update: MatchUpdate) => {
+    const { homeTeamGoals, awayTeamGoals } = update;
+    await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return 'Updated';
   };
 }

@@ -55,4 +55,15 @@ export default class MatchController {
       console.log(error);
     }
   };
+
+  public updateMatch = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const update = req.body;
+      const message = await this.service.updateMatch(Number(id), update);
+      return res.status(httpStatus.ok).json({ message });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }

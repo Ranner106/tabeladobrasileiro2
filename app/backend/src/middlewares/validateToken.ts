@@ -8,9 +8,9 @@ const validateToken = async (req: Request, res: Response, next: NextFunction) =>
     return res.status(httpStatus.unauthorized).json({ message: 'Token not found' });
   }
 
-  const { type, message } = verifyJWT(authorization);
+  const { type } = verifyJWT(authorization);
   if (type) {
-    return res.status(type).json({ message });
+    return res.status(type).json({ message: 'Token must be a valid token' });
   }
 
   next();
