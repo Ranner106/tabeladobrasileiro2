@@ -31,4 +31,9 @@ export default class MatchService {
     });
     return newMatch;
   };
+
+  public finishMatch = async (id: number) => {
+    await Match.update({ inProgress: false }, { where: { id } });
+    return 'Finished';
+  };
 }

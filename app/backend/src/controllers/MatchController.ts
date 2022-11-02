@@ -45,4 +45,14 @@ export default class MatchController {
       console.log(error);
     }
   };
+
+  public finishMatch = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const message = await this.service.finishMatch(Number(id));
+      return res.status(httpStatus.ok).json({ message });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
